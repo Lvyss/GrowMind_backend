@@ -8,17 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
-
-class UserProgress extends Model
+class QuizOption extends Model
 {
 use HasFactory;
 
 
-protected $fillable = ['user_id','module_id','lesson_id','is_completed','score','exp_earned'];
+protected $fillable = ['question_id','option_text'];
 
 
-public function user()
+public function question()
 {
-return $this->belongsTo(User::class);
+return $this->belongsTo(QuizQuestion::class);
 }
 }

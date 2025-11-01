@@ -6,23 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-public function up(): void
-{
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password')->nullable(); // optional kalau pakai login Google
-            $table->string('google_id')->nullable()->unique();
-$table->integer('exp')->default(0);
-$table->json('completed_modules')->nullable();
-
-            $table->rememberToken();
-            $table->timestamps();
-    });
+    public function up(): void
+    {
+Schema::create('users', function (Blueprint $table) {
+$table->id();
+$table->string('name');
+$table->string('email')->unique();
+$table->string('password')->nullable();
+$table->string('avatar')->nullable();
+$table->string('google_id')->nullable();
+$table->timestamps();
+});
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
@@ -40,13 +34,10 @@ $table->json('completed_modules')->nullable();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
     }
 };

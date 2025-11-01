@@ -9,16 +9,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class UserProgress extends Model
+class UserAchievement extends Model
 {
 use HasFactory;
 
 
-protected $fillable = ['user_id','module_id','lesson_id','is_completed','score','exp_earned'];
-
-
-public function user()
-{
-return $this->belongsTo(User::class);
-}
+protected $fillable = ['user_id','achievement_id','earned_at'];
 }

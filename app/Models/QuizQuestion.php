@@ -9,16 +9,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class UserProgress extends Model
+class QuizQuestion extends Model
 {
 use HasFactory;
 
 
-protected $fillable = ['user_id','module_id','lesson_id','is_completed','score','exp_earned'];
+protected $fillable = ['quiz_id','question','type','correct_answer'];
 
 
-public function user()
+public function options()
 {
-return $this->belongsTo(User::class);
+return $this->hasMany(QuizOption::class, 'question_id');
 }
 }

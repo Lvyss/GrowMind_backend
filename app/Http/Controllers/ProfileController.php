@@ -21,26 +21,28 @@ use App\Models\UserAchievement;
 use App\Services\ExperienceService;
 
 
+
 /*
 |--------------------------------------------------------------------------
-| ModuleController
+| ProfileController
 |--------------------------------------------------------------------------
 */
 
-class ModuleController extends Controller
+class ProfileController extends Controller
 {
-    public function index()
-    {
-        $modules = Module::withCount(['lessons'])->get();
-        return response()->json($modules);
-    }
+public function show(Request $request) {
+    return response()->json([
+        'user' => $request->user(),         // info user
+        'profile' => $request->user()->profile // info profil
+    ]);
+}
 
 
-    public function show($slug)
+
+    public function update(Request $req)
     {
-        $module = Module::where('slug', $slug)->with(['lessons' => function ($q) {
-            $q->orderBy('order');
-        }, 'quiz.questions.options'])->firstOrFail();
-        return response()->json($module);
+        $profile = $req->user()->profile;
+        $profile->update($req->only(['bio', 'avatar']));
+        return response()->json($profile);
     }
 }

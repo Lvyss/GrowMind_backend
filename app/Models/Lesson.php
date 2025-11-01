@@ -9,16 +9,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class UserProgress extends Model
+class Lesson extends Model
 {
 use HasFactory;
 
 
-protected $fillable = ['user_id','module_id','lesson_id','is_completed','score','exp_earned'];
+protected $fillable = ['module_id','title','content','video_url','order'];
 
 
-public function user()
+public function module()
 {
-return $this->belongsTo(User::class);
+return $this->belongsTo(Module::class);
 }
 }

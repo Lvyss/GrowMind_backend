@@ -23,13 +23,15 @@ class AuthController extends Controller
         $user = User::where('google_id', $googleUser->getId())->first();
 
         if (!$user) {
-            $user = User::create([
-                'name' => $googleUser->getName(),
-                'email' => $googleUser->getEmail(),
-                'google_id' => $googleUser->getId(),
-                'avatar' => $googleUser->getAvatar(),
-                'password' => Hash::make(Str::random(24)),
-            ]);
+$user = User::create([
+    'name' => $googleUser->getName(),
+    'email' => $googleUser->getEmail(),
+    'google_id' => $googleUser->getId(),
+    'avatar' => $googleUser->getAvatar(),
+    'role' => 'user', // default
+    'password' => Hash::make(Str::random(24)),
+]);
+
         }
 
         // Buat Sanctum Token

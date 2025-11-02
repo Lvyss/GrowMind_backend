@@ -4,20 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration {
     public function up(): void
     {
-Schema::create('modules', function (Blueprint $table) {
-$table->id();
-$table->string('title');
-$table->string('slug')->unique();
-$table->text('description');
-$table->string('thumbnail');
-$table->enum('difficulty', ['beginner', 'intermediate', 'advanced']);
-$table->string('theme');
-$table->timestamps();
-});
+        Schema::create('modules', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->json('content')->nullable(); // tiptap JSON
+            $table->enum('status', ['draft', 'published'])->default('draft');
+            $table->timestamps();
+        });
     }
 
     public function down(): void
@@ -25,3 +22,4 @@ $table->timestamps();
         Schema::dropIfExists('modules');
     }
 };
+

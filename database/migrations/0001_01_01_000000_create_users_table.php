@@ -8,15 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-Schema::create('users', function (Blueprint $table) {
-$table->id();
-$table->string('name');
-$table->string('email')->unique();
-$table->string('password')->nullable();
-$table->string('avatar')->nullable();
-$table->string('google_id')->nullable();
-$table->timestamps();
-});
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('google_id')->nullable();
+            $table->enum('role', ['user', 'admin'])->default('user'); // ✅ role
+            $table->timestamps();
+        });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

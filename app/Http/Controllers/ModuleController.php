@@ -91,9 +91,11 @@ public function userModules() {
 
 // Method untuk user melihat detail modul
 public function userModule($slug) {
-    $module = Module::where('slug', $slug)
+    $module = Module::with('challenges') // ambil semua challenge terkait
+                    ->where('slug', $slug)
                     ->where('status', 'published')
                     ->firstOrFail();
     return response()->json($module);
 }
+
 }

@@ -13,5 +13,11 @@ class Module extends Model
     protected $casts = [
         'content' => 'array', // auto decode JSON
     ];
+
+    public function challenges()
+{
+    return $this->hasMany(ModuleFillChallenge::class);
+}
+
 }
 

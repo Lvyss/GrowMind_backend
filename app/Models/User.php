@@ -11,36 +11,21 @@ class User extends Authenticatable
     use HasApiTokens, Notifiable;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'avatar',
-        'google_id',
-        'role',
+        'name', 'email', 'password', 'avatar', 'google_id', 'role'
     ];
 
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token',
     ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    // Check role helper
-    public function isAdmin(): bool
+    public function profile()
     {
-        return $this->role === 'admin';
+        return $this->hasOne(Profile::class);
     }
 
-    public function isUser(): bool
-    {
-        return $this->role === 'user';
-    }
-public function profile()
+public function sectionProgress()
 {
-return $this->hasOne(Profile::class);
+    return $this->hasMany(UserSectionProgress::class);
 }
 
 }

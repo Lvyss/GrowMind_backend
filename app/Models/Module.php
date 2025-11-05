@@ -6,18 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    protected $fillable = [
-        'title', 'slug', 'content', 'status'
-    ];
+    protected $fillable = ['slug', 'title', 'description', 'published'];
 
-    protected $casts = [
-        'content' => 'array', // auto decode JSON
-    ];
-
-    public function challenges()
-{
-    return $this->hasMany(ModuleFillChallenge::class);
+    public function sections()
+    {
+        return $this->hasMany(ModuleSection::class)->orderBy('order');
+    }
 }
-
-}
-
